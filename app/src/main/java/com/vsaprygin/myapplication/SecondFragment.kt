@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.vsaprygin.myapplication.databinding.FragmentSecondBinding
 
+
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
@@ -31,11 +32,13 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.saveBtn.setOnClickListener(){
+            val title = binding.editTitle.text.toString()
+            val content = binding.editContent.text.toString()
+            val notes=Notes(id =-1, title = title, content = content)
+            NotesRepository.add(notes)
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
     }
 }

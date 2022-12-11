@@ -1,3 +1,10 @@
 package com.vsaprygin.myapplication
 
-data class Notes(val id:Int, var title:String,var content:String)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "Notes")
+data class Notes(
+    @PrimaryKey(autoGenerate = true) var id:Int,
+    var title:String,
+    var content:String)

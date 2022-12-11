@@ -15,9 +15,7 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListViewHolder>() {
         }
 
     private var itemClick: (Notes) -> Unit = {}
-    fun itemClick(listener: (Notes) -> Unit) {
-        itemClick = listener
-    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.notes_list_item, parent, false)
