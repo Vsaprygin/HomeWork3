@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vsaprygin.myapplication.databinding.NotesListItemBinding
 
-class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ViewHolder>() {
+class NotesListAdapter : RecyclerView.Adapter<NotesListViewHolder>() {
 
-    var items: List<Notes> = mutableListOf()
+    var items = mutableListOf<Notes>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -19,12 +19,12 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ViewHolder>() {
         itemClick = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.notes_list_item, parent, false)
-        return ViewHolder(view)
+        return NotesListViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NotesListViewHolder, position: Int) {
         holder.binding.notes = items[position]
         holder.itemView.setOnClickListener {
             itemClick(items[position])
@@ -34,10 +34,8 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
         return items.size
     }
+}
+class NotesListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    var binding = NotesListItemBinding.bind(view)
 
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var binding = NotesListItemBinding.bind(view)
-
-    }
 }

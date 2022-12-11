@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.vsaprygin.myapplication.databinding.FragmentFirstBinding
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
+
 class FirstFragment() : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
@@ -35,6 +33,10 @@ class FirstFragment() : Fragment() {
         binding.addBtn.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+        val adapter = NotesListAdapter()
+        val reposirory = NotesRepository()
+        adapter.items = reposirory.getAll()
+        binding.recyclerView.adapter = adapter
     }
 
     override fun onDestroyView() {
