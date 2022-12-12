@@ -37,7 +37,7 @@ class FirstFragment() : Fragment() {
         val adapter = NotesListAdapter()
         adapter.items = NotesRepository.getAll()
         adapter.items.forEach {
-          dao.insert(it)
+//          dao.insert(it)
         }
         binding.recyclerView.adapter = adapter
     }
