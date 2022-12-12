@@ -8,11 +8,16 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import com.vsaprygin.myapplication.databinding.FragmentFirstBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 class FirstFragment() : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
     private val binding get() = _binding!!
     lateinit var dao: NoteDao
     override fun onCreateView(
@@ -23,6 +28,9 @@ class FirstFragment() : Fragment() {
         val room = Room.databaseBuilder(requireContext(), LocalDB::class.java, "Notes").build()
         dao = room.noteDao()
         return binding.root
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,9 +44,16 @@ class FirstFragment() : Fragment() {
         }
         val adapter = NotesListAdapter()
         adapter.items = NotesRepository.getAll()
-        adapter.items.forEach {
+//        adapter.items.forEach {
 //          dao.insert(it)
+//        }
+suspend fun insert(vararg notes: Notes){
+    withContext(Dispatchers.IO){
+        adapter.items.forEach {
+            dao.insert(it)
         }
+    }
+}
         binding.recyclerView.adapter = adapter
     }
 

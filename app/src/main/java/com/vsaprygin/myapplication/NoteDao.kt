@@ -11,7 +11,7 @@ interface NoteDao {
     fun getAll(): List<Notes>
 
     @Insert(onConflict = REPLACE)
-    fun insert(notes: Notes)
+    suspend fun insert(vararg notes: Notes)
 
     @Delete
     fun delete(notes: Notes)
