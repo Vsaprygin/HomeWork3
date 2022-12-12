@@ -10,7 +10,6 @@ class NotesRepository {
             notes.id = countId
             countId++
             list.add(notes)
-
         }
 
     }

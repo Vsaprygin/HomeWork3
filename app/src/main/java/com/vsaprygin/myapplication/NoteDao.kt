@@ -1,14 +1,9 @@
 package com.vsaprygin.myapplication
-
-
-
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-
-
 
 @Dao
 interface NoteDao {
@@ -16,8 +11,8 @@ interface NoteDao {
     fun getAll(): List<Notes>
 
     @Insert(onConflict = REPLACE)
-    fun insert(notesRepository: Notes)
+    fun insert(notes: Notes)
 
     @Delete
-    fun delete(post: Notes)
+    fun delete(notes: Notes)
 }

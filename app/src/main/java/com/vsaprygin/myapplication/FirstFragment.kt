@@ -13,20 +13,16 @@ import com.vsaprygin.myapplication.databinding.FragmentFirstBinding
 class FirstFragment() : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-
+    lateinit var dao: NoteDao
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        val room = Room.databaseBuilder(requireContext(), LocalDB::class.java, "Notes").build()
+        dao = room.noteDao()
         return binding.root
-
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,11 +31,14 @@ class FirstFragment() : Fragment() {
         binding.addBtn.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-//        binding.exitBtn.setOnClickListener{
-//
-//        }
+        binding.exitBtn.setOnClickListener{
+          System.exit(0)
+        }
         val adapter = NotesListAdapter()
         adapter.items = NotesRepository.getAll()
+        adapter.items.forEach {
+          dao.insert(it)
+        }
         binding.recyclerView.adapter = adapter
     }
 
