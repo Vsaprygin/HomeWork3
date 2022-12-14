@@ -44,16 +44,7 @@ class FirstFragment() : Fragment() {
         }
         val adapter = NotesListAdapter()
         adapter.items = NotesRepository.getAll()
-//        adapter.items.forEach {
-//          dao.insert(it)
-//        }
-suspend fun insert(vararg notes: Notes){
-    withContext(Dispatchers.IO){
-        adapter.items.forEach {
-            dao.insert(it)
-        }
-    }
-}
+
         binding.recyclerView.adapter = adapter
     }
 

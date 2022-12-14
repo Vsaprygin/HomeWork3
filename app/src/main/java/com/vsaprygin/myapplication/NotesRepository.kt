@@ -1,6 +1,8 @@
 package com.vsaprygin.myapplication
 
-class NotesRepository {
+class NotesRepository (private val dao: NoteDao) {
+    val list = dao.getAll()
+
     companion object {
         private val list = mutableListOf<Notes>()
         private var countId =0

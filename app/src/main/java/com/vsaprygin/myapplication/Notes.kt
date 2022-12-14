@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Notes")
 data class Notes(
-    @PrimaryKey(autoGenerate = true) var id:Int,
+    @PrimaryKey(autoGenerate = true) var id: Int,
     var title:String,
     var content:String)
